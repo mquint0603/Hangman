@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+        Press any key to guess!
+        <!-- <input type="text" id="guessForm"> 
+        <button type="button" onclick="myFunction()">Submit</button> -->
+        
+    <p id="blanks"></p>
+    <h3>Remaining Tries:</h3>
+    <p id="triesRemaining"></p>
+    <h3>Letters remaining:</h3>
+    <p id="lettersRemaining"></p>
+    <h3>Letters already guessed:</h3>
+    <p id="letterBank"></p>
+
+
+    <script>
+        
+        
+const wordArray = ['rooibos', 'peppermint', 'chai', 'jasmine', 'chammomile'];
+var word = wordArray [Math.floor(Math.random() * wordArray.length)];
+console.log(word);
+
+var blanks = [];
+ for (var i = 0; i < word.length; i++) {
+ blanks[i] = "_";
+ }
+//sets up blanks equal to word length
+document.querySelector('#blanks').innerHTML = blanks.join(' ');
+
+let remainingTries = 10;
+document.querySelector('#triesRemaining').innerHTML = remainingTries;
+let remainingLetters = word.length
+document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
+
+let alreadyGuessed = [];
+
+function lowerRemainingLetters(){
+    for (var i = 0; i < 1; i++) {
+        remainingLetters--;
+        document.querySelector('#lettersRemaining').innerHTML = remainingLetters;}
+}
+
+function lowerRemainingTries(){
+    for (var i = 0; i < 1; i++) {
+        remainingTries--;
+        document.querySelector('#triesRemaining').innerHTML = remainingTries;}
+}
+
+
+
+    document.onkeyup = function(event){ 
+    var guess = event.key;
+    if (guess.length == "") {
+        alert('Please enter 1 letter');
+        return false;
+    } 
+     // add data to the array
+    alreadyGuessed.push(guess);   
+    //keeps all guessed letters in letter bank   
+
+    var pval = "";              
+    for(i = 0; i < alreadyGuessed.length; i++){
+        pval = pval + alreadyGuessed[i] + "   ";
+    }           
+    // shows already guessed letters
+    document.getElementById('letterBank').innerHTML = pval;
+
+//if the guess if right...
+    if (word.indexOf(guess) > -1){
+        console.log('yay');
+        lowerRemainingLetters()
+        lowerRemainingTries()
+
+    // change a blank to guess value. same position in blanks as word
+        // for (var i = 0; i < blanks.length; i++) {
+            blanks[word.indexOf(guess)] = guess;
+            document.querySelector('#blanks').innerHTML = blanks.join(' ');
+
+            // how to get repeated letters to work?
+
+    } else {
+        lowerRemainingTries()
+        //only lowers remaining tries
+    }
+
+
+//win/lose scenarios
+    if (remainingTries === 0){
+         alert('Game over!')
+    } else if (remainingLetters === 0){
+        alert('You win!')
+    }
+
+
+}
+
+
+
+
+// if a letter is guessed that is already in the letter bank, don't change anything
+    // if (alreadyGuessed.indexOf(guess) > -1)
+
+    //how to get it to pick a new word without refresh
+        
+        
+        </script>
+</body>
+</html>
