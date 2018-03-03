@@ -18,15 +18,19 @@
     <p id="lettersRemaining"></p>
     <h3>Letters already guessed:</h3>
     <p id="letterBank"></p>
+    <h3>Wins</h3>
+    <p id="wins"></p>
+    <h3>Losses</h3>
+    <p id="losses"></p>
 
 
     <script>
         
         
-const wordArray = ['rooibos', 'peppermint', 'chai', 'jasmine', 'chammomile'];
+const wordArray = ['rooibos', 'peppermint', 'chai', 'jasmine', 'green', 'black'];
 var word = wordArray [Math.floor(Math.random() * wordArray.length)];
 console.log(word);
-
+var alreadyGuessed = [];
 var blanks = [];
  for (var i = 0; i < word.length; i++) {
  blanks[i] = "_";
@@ -34,68 +38,83 @@ var blanks = [];
 //sets up blanks equal to word length
 document.querySelector('#blanks').innerHTML = blanks.join(' ');
 
-let remainingTries = 10;
+var remainingTries = 10;
 document.querySelector('#triesRemaining').innerHTML = remainingTries;
-let remainingLetters = word.length
+var remainingLetters = word.length
 document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
 
-let alreadyGuessed = [];
+var winCount = 0;
+document.getElementById('wins').innerHTML = winCount;
+var lossCount = 0;
+document.getElementById('losses').innerHTML = lossCount;
 
-function lowerRemainingLetters(){
-    for (var i = 0; i < 1; i++) {
-        remainingLetters--;
-        document.querySelector('#lettersRemaining').innerHTML = remainingLetters;}
-}
 
-function lowerRemainingTries(){
-    for (var i = 0; i < 1; i++) {
-        remainingTries--;
-        document.querySelector('#triesRemaining').innerHTML = remainingTries;}
+
+function resetGame(){
+    word = wordArray [Math.floor(Math.random() * wordArray.length)];
+    console.log(word);
+    // inside function... split word into an array (new variable to be array)
+    // blanks.splice.(i,1,guess)
+    //.innerhtml the blanks array
+    blanks = [];
+    for (var i = 0; i < word.length; i++) {
+    blanks[i] = "_";
+    }
+    //sets up blanks equal to word length
+    document.querySelector('#blanks').innerHTML = blanks.join(' ');
+    alreadyGuessed = [];
+    remainingLetters = word.length
+    remainingTries = 10;
+
+    document.getElementById('letterBank').innerHTML = alreadyGuessed;
+    document.querySelector('#triesRemaining').innerHTML = remainingTries;
+    document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
 }
 
 
 
     document.onkeyup = function(event){ 
     var guess = event.key;
-    if (guess.length == "") {
-        alert('Please enter 1 letter');
-        return false;
-    } 
      // add data to the array
+    
+    
+
+if (alreadyGuessed.indexOf(guess) < 0){
     alreadyGuessed.push(guess);   
-    //keeps all guessed letters in letter bank   
-
-    var pval = "";              
-    for(i = 0; i < alreadyGuessed.length; i++){
-        pval = pval + alreadyGuessed[i] + "   ";
-    }           
-    // shows already guessed letters
-    document.getElementById('letterBank').innerHTML = pval;
-
+    document.getElementById('letterBank').innerHTML = alreadyGuessed.join(' ');
 //if the guess if right...
-    if (word.indexOf(guess) > -1){
+    if (word.indexOf(guess) > -1 ){
         console.log('yay');
-        lowerRemainingLetters()
-        lowerRemainingTries()
 
-    // change a blank to guess value. same position in blanks as word
-        // for (var i = 0; i < blanks.length; i++) {
-            blanks[word.indexOf(guess)] = guess;
-            document.querySelector('#blanks').innerHTML = blanks.join(' ');
-
-            // how to get repeated letters to work?
-
+        for ( i= 0; i < word.length;  i++){
+            if (word[i] === guess) {
+        	blanks[i] = guess + " ";
+            remainingLetters--;
+        	document.querySelector('#blanks').innerHTML = blanks.join(' ');
+            }
+        }
+            document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
     } else {
-        lowerRemainingTries()
+        remainingTries--;
+        document.querySelector('#triesRemaining').innerHTML = remainingTries;
         //only lowers remaining tries
     }
+} else{
+    console.log("You already guessed this letter")
+}
+
 
 
 //win/lose scenarios
     if (remainingTries === 0){
-         alert('Game over!')
+         lossCount++;
+         document.getElementById('losses').innerHTML = lossCount;
+         resetGame();
     } else if (remainingLetters === 0){
-        alert('You win!')
+        winCount++;
+        document.getElementById('wins').innerHTML = winCount;
+        resetGame()
+        //function to pick new word, reset blanks, remaining tries/letters, and already guessed
     }
 
 
@@ -105,9 +124,8 @@ function lowerRemainingTries(){
 
 
 // if a letter is guessed that is already in the letter bank, don't change anything
-    // if (alreadyGuessed.indexOf(guess) > -1)
+    // if ()
 
-    //how to get it to pick a new word without refresh
         
         
         </script>
