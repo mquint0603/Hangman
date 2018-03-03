@@ -28,26 +28,10 @@
         
         
 const wordArray = ['rooibos', 'peppermint', 'chai', 'jasmine', 'green', 'black'];
-
-var word = wordArray [Math.floor(Math.random() * wordArray.length)];
-console.log(word);
-var alreadyGuessed = [];
-var blanks = [];
- for (var i = 0; i < word.length; i++) {
- blanks[i] = "_";
- }
-//sets up blanks equal to word length
-document.querySelector('#blanks').innerHTML = blanks.join(' ');
-
-var remainingTries = word.length + 5;
-document.querySelector('#triesRemaining').innerHTML = remainingTries;
-var remainingLetters = word.length
-document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
-
 var winCount = 0;
-document.getElementById('wins').innerHTML = winCount;
 var lossCount = 0;
 document.getElementById('losses').innerHTML = lossCount;
+document.getElementById('wins').innerHTML = winCount;
 
 
 
@@ -70,38 +54,38 @@ function resetGame(){
     document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
 }
 
+resetGame()
 
 
 document.onkeyup = function(event){ 
     var guess = event.key;
-     // add data to the array
-
+    guess = guess.toLowerCase();
     if (alreadyGuessed.indexOf(guess) < 0){
         alreadyGuessed.push(guess);   
         document.getElementById('letterBank').innerHTML = alreadyGuessed.join(' ');
-    //if the guess if right...
+
+         //if the guess if right...
         if (word.indexOf(guess) > -1 ){
             console.log('yay');
-
             for ( i= 0; i < word.length;  i++){
                 if (word[i] === guess) {
                 blanks[i] = guess + " ";
                 remainingLetters--;
                 document.querySelector('#blanks').innerHTML = blanks.join(' ');
-                }
-            }
                 document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
+                }
+            }             
         } else {
             remainingTries--;
             document.querySelector('#triesRemaining').innerHTML = remainingTries;
-            //only lowers remaining tries
         }
+
     } else{
         console.log("You already guessed this letter")
     }
 
 
-//win/lose scenarios
+    //win/lose scenarios
     if (remainingTries === 0){
          lossCount++;
          document.getElementById('losses').innerHTML = lossCount;
