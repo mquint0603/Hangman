@@ -28,6 +28,7 @@
         
         
 const wordArray = ['rooibos', 'peppermint', 'chai', 'jasmine', 'green', 'black'];
+
 var word = wordArray [Math.floor(Math.random() * wordArray.length)];
 console.log(word);
 var alreadyGuessed = [];
@@ -38,7 +39,7 @@ var blanks = [];
 //sets up blanks equal to word length
 document.querySelector('#blanks').innerHTML = blanks.join(' ');
 
-var remainingTries = 10;
+var remainingTries = word.length + 5;
 document.querySelector('#triesRemaining').innerHTML = remainingTries;
 var remainingLetters = word.length
 document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
@@ -53,18 +54,16 @@ document.getElementById('losses').innerHTML = lossCount;
 function resetGame(){
     word = wordArray [Math.floor(Math.random() * wordArray.length)];
     console.log(word);
-    // inside function... split word into an array (new variable to be array)
-    // blanks.splice.(i,1,guess)
-    //.innerhtml the blanks array
     blanks = [];
+    //sets up blanks equal to word length
     for (var i = 0; i < word.length; i++) {
     blanks[i] = "_";
     }
-    //sets up blanks equal to word length
     document.querySelector('#blanks').innerHTML = blanks.join(' ');
+
     alreadyGuessed = [];
     remainingLetters = word.length
-    remainingTries = 10;
+    remainingTries = word.length + 5;
 
     document.getElementById('letterBank').innerHTML = alreadyGuessed;
     document.querySelector('#triesRemaining').innerHTML = remainingTries;
@@ -73,36 +72,33 @@ function resetGame(){
 
 
 
-    document.onkeyup = function(event){ 
+document.onkeyup = function(event){ 
     var guess = event.key;
      // add data to the array
-    
-    
 
-if (alreadyGuessed.indexOf(guess) < 0){
-    alreadyGuessed.push(guess);   
-    document.getElementById('letterBank').innerHTML = alreadyGuessed.join(' ');
-//if the guess if right...
-    if (word.indexOf(guess) > -1 ){
-        console.log('yay');
+    if (alreadyGuessed.indexOf(guess) < 0){
+        alreadyGuessed.push(guess);   
+        document.getElementById('letterBank').innerHTML = alreadyGuessed.join(' ');
+    //if the guess if right...
+        if (word.indexOf(guess) > -1 ){
+            console.log('yay');
 
-        for ( i= 0; i < word.length;  i++){
-            if (word[i] === guess) {
-        	blanks[i] = guess + " ";
-            remainingLetters--;
-        	document.querySelector('#blanks').innerHTML = blanks.join(' ');
+            for ( i= 0; i < word.length;  i++){
+                if (word[i] === guess) {
+                blanks[i] = guess + " ";
+                remainingLetters--;
+                document.querySelector('#blanks').innerHTML = blanks.join(' ');
+                }
             }
+                document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
+        } else {
+            remainingTries--;
+            document.querySelector('#triesRemaining').innerHTML = remainingTries;
+            //only lowers remaining tries
         }
-            document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
-    } else {
-        remainingTries--;
-        document.querySelector('#triesRemaining').innerHTML = remainingTries;
-        //only lowers remaining tries
+    } else{
+        console.log("You already guessed this letter")
     }
-} else{
-    console.log("You already guessed this letter")
-}
-
 
 
 //win/lose scenarios
@@ -114,20 +110,9 @@ if (alreadyGuessed.indexOf(guess) < 0){
         winCount++;
         document.getElementById('wins').innerHTML = winCount;
         resetGame()
-        //function to pick new word, reset blanks, remaining tries/letters, and already guessed
     }
-
-
 }
-
-
-
-
-// if a letter is guessed that is already in the letter bank, don't change anything
-    // if ()
-
-        
-        
+  
         </script>
 </body>
 </html>
