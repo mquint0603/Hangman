@@ -1,4 +1,4 @@
-const wordArray = ['rooibos', 'peppermint', 'chai', 'jasmine', 'green', 'black'];
+const wordArray = ['cezanne', 'picasso', 'frankenthaler', 'matisse', 'monet', 'manet','gaugin', 'degas', 'kandinsky', 'rothko', 'dekooning', 'kahlo', 'van gogh'];
 var winCount = 0;
 var lossCount = 0;
 document.getElementById('losses').innerHTML = lossCount;
@@ -12,7 +12,7 @@ function resetGame(){
     blanks = [];
     //sets up blanks equal to word length
     for (var i = 0; i < word.length; i++) {
-    blanks[i] = "_";
+     blanks[i] = "_";
     }
     document.querySelector('#blanks').innerHTML = blanks.join(' ');
 
@@ -42,7 +42,7 @@ document.onkeyup = function(event){
             console.log('yay');
             for ( i= 0; i < word.length;  i++){
                 if (word[i] === guess) {
-                blanks[i] = guess + " ";
+                blanks[i] = guess.toUpperCase() + " ";
                 remainingLetters--;
                 document.querySelector('#blanks').innerHTML = blanks.join(' ');
                 document.querySelector('#lettersRemaining').innerHTML = remainingLetters;
@@ -61,10 +61,12 @@ document.onkeyup = function(event){
 
     //win/lose scenarios
     if (remainingTries === 0 && remainingLetters > 0){
+        alert('You lose! The answer was ' + word.toUpperCase())
          lossCount++;
          document.getElementById('losses').innerHTML = lossCount;
          resetGame();
     } else if (remainingLetters === 0){
+        alert('You got it!')
         winCount++;
         document.getElementById('wins').innerHTML = winCount;
         resetGame()
