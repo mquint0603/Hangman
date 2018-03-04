@@ -1,7 +1,9 @@
 const wordArray = [{name: 'cezanne', img: 'assets/images/cezanne.jpg'}, {name: 'picasso', img: 'assets/images/picasso.jpg'},
     {name: 'frankenthaler', img: 'assets/images/frankenthaler.jpg'}, {name: 'matisse', img: 'assets/images/matisse.jpg'}, {name: 'kahlo', img: 'assets/images/kahlo.jpg'}, 
     {name: 'monet', img: 'assets/images/monet.jpg'}, {name: 'gauguin', img: 'assets/images/gauguin.jpg'}, {name: 'rothko', img: 'assets/images/rothko.jpeg'}, {name: 'dekooning', img: 'assets/images/dekooning.jpg'},
-    {name: 'manet', img: 'assets/images/manet.jpg'}, {name: 'degas', img: 'assets/images/degas.jpg'}, {name: 'kandinsky', img: 'assets/images/kandinksy.jpg'}, {name: 'vangogh', img: 'assets/images/vangogh.jpg'}];
+    {name: 'manet', img: 'assets/images/manet.jpg'}, {name: 'degas', img: 'assets/images/degas.jpg'}, {name: 'kandinsky', img: 'assets/images/kandinksy.jpg'}, {name: 'vangogh', img: 'assets/images/vangogh.jpg'},
+    {name: 'seurat', img: 'assets/images/seurat.jpg'}, {name: 'mondrian', img: 'assets/images/mondrian.jpg'}, {name: 'munch', img: 'assets/images/munch.jpg'}, {name: 'hopper', img: 'assets/images/hopper.jpeg'},
+    {name: 'wyeth', img: 'assets/images/wyeth.jpg'}, {name: 'lichtenstein', img: 'assets/images/lichtenstein.jpg'}];
 var winCount = 0;
 var lossCount = 0;
 document.getElementById('losses').innerHTML = lossCount;

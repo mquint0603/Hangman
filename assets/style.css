@@ -4,6 +4,10 @@
 /* #imageDisplay{
     width: 500px;
 } */
+body{
+    background-image: url("images/debut_light.png");
+}
+
 .img {
     width:100%
 }
