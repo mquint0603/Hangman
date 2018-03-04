@@ -1,4 +1,7 @@
-const wordArray = ['cezanne', 'picasso', 'frankenthaler', 'matisse', 'monet', 'manet','gaugin', 'degas', 'kandinsky', 'rothko', 'dekooning', 'kahlo', 'van gogh'];
+const wordArray = [{name: 'cezanne', img: 'assets/images/cezanne.jpg'}, {name: 'picasso', img: 'assets/images/picasso.jpg'},
+    {name: 'frankenthaler', img: 'assets/images/frankenthaler.jpg'}, {name: 'matisse', img: 'assets/images/matisse.jpg'}, {name: 'kahlo', img: 'assets/images/kahlo.jpg'}, 
+    {name: 'monet', img: 'assets/images/monet.jpg'}, {name: 'gauguin', img: 'assets/images/gauguin.jpg'}, {name: 'rothko', img: 'assets/images/rothko.jpeg'}, {name: 'dekooning', img: 'assets/images/dekooning.jpg'},
+    {name: 'manet', img: 'assets/images/manet.jpg'}, {name: 'degas', img: 'assets/images/degas.jpg'}, {name: 'kandinsky', img: 'assets/images/kandinksy.jpg'}, {name: 'vangogh', img: 'assets/images/vangogh.jpg'}];
 var winCount = 0;
 var lossCount = 0;
 document.getElementById('losses').innerHTML = lossCount;
@@ -7,7 +10,14 @@ document.getElementById('wins').innerHTML = winCount;
 
 
 function resetGame(){
-    word = wordArray [Math.floor(Math.random() * wordArray.length)];
+    document.getElementById('imageDisplay').innerHTML = "";
+    indexNumber = Math.floor(Math.random() * wordArray.length);
+    word = wordArray[indexNumber].name
+    pictureURL = wordArray[indexNumber].img;
+    var picture = document.createElement("img")
+    picture.src = pictureURL;
+    picture.setAttribute("style", "width: 100%;");
+    document.getElementById('imageDisplay').appendChild(picture);
     console.log(word);
     blanks = [];
     //sets up blanks equal to word length
@@ -66,7 +76,7 @@ document.onkeyup = function(event){
          document.getElementById('losses').innerHTML = lossCount;
          resetGame();
     } else if (remainingLetters === 0){
-        alert('You got it!')
+        alert('You got it! The answer was ' + word.toUpperCase())
         winCount++;
         document.getElementById('wins').innerHTML = winCount;
         resetGame()

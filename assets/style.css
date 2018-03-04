@@ -1,7 +1,12 @@
 /* p{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;  
 } */
-
+/* #imageDisplay{
+    width: 500px;
+} */
+.img {
+    width:100%
+}
 .stat-area{
     /* display: inline-block; */
     /* margin: 5px; */
