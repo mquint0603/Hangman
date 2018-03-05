@@ -13,6 +13,7 @@ document.getElementById('wins').innerHTML = winCount;
 
 function resetGame(){
     document.getElementById('imageDisplay').innerHTML = "";
+
     indexNumber = Math.floor(Math.random() * wordArray.length);
     word = wordArray[indexNumber].name
     pictureURL = wordArray[indexNumber].img;
@@ -21,6 +22,7 @@ function resetGame(){
     picture.setAttribute("style", "width: 100%;");
     document.getElementById('imageDisplay').appendChild(picture);
     console.log(word);
+    
     blanks = [];
     //sets up blanks equal to word length
     for (var i = 0; i < word.length; i++) {
