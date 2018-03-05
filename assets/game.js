@@ -9,14 +9,20 @@ var lossCount = 0;
 document.getElementById('losses').innerHTML = lossCount;
 document.getElementById('wins').innerHTML = winCount;
 
+//declaring global variables
+var word;
+var blanks;
+var alreadyGuessed;
+var remainingLetters
+var remainingTries;
 
 
 function resetGame(){
     document.getElementById('imageDisplay').innerHTML = "";
 
-    indexNumber = Math.floor(Math.random() * wordArray.length);
+    var indexNumber = Math.floor(Math.random() * wordArray.length);
     word = wordArray[indexNumber].name
-    pictureURL = wordArray[indexNumber].img;
+    var pictureURL = wordArray[indexNumber].img;
     var picture = document.createElement("img")
     picture.src = pictureURL;
     picture.setAttribute("style", "width: 100%;");
